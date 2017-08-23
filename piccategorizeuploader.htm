@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCP Cloud Vision API Picture Categorization</title>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+    <link rel="stylesheet" type="text/css" href="canvas.css" media="screen">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+	<script src="canvas.js"></script>
+</head>
+<body>
+<div class="container">
+    <div id="header"><h2>Google Cloud Vision 圖片分類標籤與評比</h2></div>
+
+    <div class="row"><div class="col-xs-6">
+        <div class="form-group">
+            
+            <input type="text" class="form-control" id="apikey" placeholder="">
+        </div>
+    </div></div>
+
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="form-group  form-inline">
+                <label for="apikey">檔案上傳 File Upload</label>
+                <input id="upload" name="upload" type="file" value="File Upload"> 
+            </div>
+        
+            <div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                <h3 class="panel-title">圖片預覽 Preview</h3>
+                </div>
+                <div class="panel-body">
+                    
+                    <div id="input-view" class="view"></div>
+                </div>
+             </div>
+        </div>
+		</div>
+        <div class="row">
+        <div class="col-xs-5">
+            <div class="form-group form-inline">
+                <label for="apitype">偵測種類 Type</label>
+                <select id="apitype" class="form-control">                   
+                    <option value="LABEL_DETECTION" selected> LABEL_DETECTION</option>
+                </select>
+				<br/>
+                <label for="maxresult">結果最大數目 Maximum number of results</label>
+                <select id="maxresult" class="form-control">                   
+                    <option value="5">5</option>
+                 </select>
+            </div>
+        </div>
+		 <div class="col-xs-1 text-center">
+            <button id="getResult" class="btn ">Execute</button>
+        </div>
+    </div>
+   
+		<table id="table" class="table"  data-toolbar="#toolbar" data-show-export="true" data-classes="table table-hover" data-striped="true"  data-search="true"
+					data-show-toggle="true" data-pagination="true" >
+			<thead>
+				<tr>
+					<th data-halign="left" data-field="id">序 ID</th>
+					<th data-halign="left" data-field="category">種類 Label(Description)</th>
+					<th data-halign="left" data-field="image">圖片 Picture</th>
+					<th data-halign="left" data-field="score">分數 Score</th>
+					<th data-halign="left" data-field="price">價錢 Price</th>
+					<th data-halign="left" data-formatter="TableActions">操作 Actions</th>
+				</tr>
+			</thead>
+			<tbody id="query-tbody">
+			</tbody>
+		</table>
+		 <div class="row">
+       
+       
+        <div class="col-xs-5">
+            <div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                <h3 class="panel-title">結果 Results</h3>
+                </div>
+                <div class="panel-body">
+                    <pre id="result" class="results"></pre>
+                </div>
+             </div>
+        </div>
+    </div>
+</div><!-- /container -->
+
+</body>
+</html>
