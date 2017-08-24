@@ -12,11 +12,12 @@
     <!-- Bootstrap JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+	<script src="key.js"></script>
 	<script src="canvas.js"></script>
 </head>
 <body>
 <div class="container">
-    <div id="header"><h2>Google Cloud Vision 圖片分類標籤與評比</h2></div>
+    <div id="header"><h3>Google Cloud Vision 圖片分類標籤與評比</h3></div>
 
     <div class="row"><div class="col-xs-6">
         <div class="form-group">
@@ -34,19 +35,8 @@
         
             <div>
             </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                <h3 class="panel-title">圖片預覽 Preview</h3>
-                </div>
-                <div class="panel-body">
-                    
-                    <div id="input-view" class="view"></div>
-                </div>
-             </div>
-        </div>
-		</div>
-        <div class="row">
-        <div class="col-xs-5">
+           
+       
             <div class="form-group form-inline">
                 <label for="apitype">偵測種類 Type</label>
                 <select id="apitype" class="form-control">                   
@@ -58,8 +48,7 @@
                     <option value="5">5</option>
                  </select>
             </div>
-        </div>
-		 <div class="col-xs-1 text-center">
+        
             <button id="getResult" class="btn ">Execute</button>
         </div>
     </div>
@@ -79,10 +68,9 @@
 			<tbody id="query-tbody">
 			</tbody>
 		</table>
-		 <div class="row">
-       
-       
-        <div class="col-xs-5">
+		 <div class="row">      
+              
+		<div class="col-xs-5">
             <div>
             </div>
             <div class="panel panel-default">
@@ -94,6 +82,17 @@
                 </div>
              </div>
         </div>
+		 <div class="col-xs-5">
+		 <div class="panel panel-default">
+                <div class="panel-heading">
+                <h3 class="panel-title">圖片預覽 Preview</h3>
+                </div>
+                <div class="panel-body">
+                    
+                    <div id="input-view" class="view"></div>
+                </div>
+             </div>
+		</div>
     </div>
 </div><!-- /container -->
 

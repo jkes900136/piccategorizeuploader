@@ -150,8 +150,9 @@ jQuery(function($) {
 
     
     $('#getResult').click(function() {
-
-        apikey = 'AIzaSyC2CS_k14sP-V9TyDN6m4ZM-s0anElhgeQ'; //$('#apikey').val()
+		
+        apikey = window.apiKey; //$('#apikey').val()
+		//window.alert(apikey);
         requestURI = 'https://vision.googleapis.com/v1/images:annotate?key='+apikey;
         apiType = $('#apitype').val();
         maxResult = $('#maxresult').val();
@@ -200,7 +201,7 @@ jQuery(function($) {
 
                 result =  JSON.stringify(response, null, '  ');
                 $('pre#result').text(result);
-				//window.alert('Done!');
+				window.alert('Done!');
 				var forTable = $("#table tbody");
 				var Label = response.responses[0].labelAnnotations;
 				
