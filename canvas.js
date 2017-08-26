@@ -213,7 +213,7 @@ jQuery(function($) {
 							"<td>" + Label[i].description + "</td>" +
 							"<td>" + Label[i].mid + "</td>" +
 							"<td>" + Label[i].score.toFixed(2) + "</td>" +
-							"<td>" + Label[i].score.toFixed(2)*100 + "</td>" +
+							"<td>" + (Label[i].score.toFixed(2)*100).toFixed(2) + "</td>" +
 							"<td> None </td>" +
 						"</tr>");
 				
