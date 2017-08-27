@@ -14,6 +14,13 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
 	<script src="key.js"></script>
 	<script src="canvas.js"></script>
+	<script type="text/javascript">
+	function remove_data() {
+	var num = document.getElementById("table").rows.length;
+	if(num >2)
+    	document.getElementById("table").deleteRow(1);
+	}
+	</script>
 </head>
 <body>
 <div class="container">
@@ -44,12 +51,15 @@
                 </select>
 				<br/>
                 <label for="maxresult">結果最大數目 Maximum number of results</label>
-                <select id="maxresult" class="form-control">                   
+                <select id="maxresult" class="form-control">     
+					<option value="1">1</option>
                     <option value="5">5</option>
+					<option value="10" selected>10</option>
                  </select>
             </div>
         
             <button id="getResult" class="btn ">Execute</button>
+			<input type="button" value="Remove the 1st row" onclick="remove_data()">
         </div>
     </div>
    
