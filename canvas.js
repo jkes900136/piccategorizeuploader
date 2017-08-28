@@ -151,8 +151,8 @@ jQuery(function($) {
     
     $('#getResult').click(function() {
 		
-        apikey = window.apiKey; //$('#apikey').val()
-		//window.alert(apikey);
+        apikey = window.apiKey; 
+		
         requestURI = 'https://vision.googleapis.com/v1/images:annotate?key='+apikey;
         apiType = $('#apitype').val();
         maxResult = $('#maxresult').val();
