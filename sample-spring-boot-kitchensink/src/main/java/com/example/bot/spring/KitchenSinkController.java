@@ -345,7 +345,7 @@ public class KitchenSinkController {
                 break;
             }
             case "buttons": {
-                String imageUrl = createUri("/static/buttons/10402.jpg");
+                String imageUrl = createUri("/static/buttons/1040.jpg");
                 ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
                         imageUrl,
                         "Y. Chang Bot Service",
@@ -366,17 +366,16 @@ public class KitchenSinkController {
                 break;
             }
             case "carousel": {
-                String imageUrla = createUri("/static/buttons/10402.jpg");
-				String imageUrlb = createUri("/static/buttons/10403.jpg");
+                String imageUrl = createUri("/static/buttons/1040.jpg");				
                 CarouselTemplate carouselTemplate = new CarouselTemplate(
                         Arrays.asList(
-                                new CarouselColumn(imageUrla, "Introduction", "Be familiar with the Bot!", Arrays.asList(
+                                new CarouselColumn(imageUrl, "Introduction", "Be familiar with the Bot!", Arrays.asList(
                                         new URIAction("Visit the official site of NTUT",
                                                       "http://www.ntut.edu.tw"),
                                         new PostbackAction("Say Hello chat bot! privately",
                                                            "Hello chat bot!")
                                 )),
-                                new CarouselColumn(imageUrlb, "Q&A", "Let's try~", Arrays.asList(
+                                new CarouselColumn(imageUrl, "Q&A", "Let's try~", Arrays.asList(
                                         new PostbackAction("Ask a question",
                                                            "What is a chatbot?",
                                                            "A chatbot is a computer program which conducts a conversation via auditory or textual methods."),
