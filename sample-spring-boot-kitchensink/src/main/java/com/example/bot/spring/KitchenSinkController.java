@@ -240,6 +240,31 @@ public class KitchenSinkController {
 
         log.info("Got text message from {}: {}", replyToken, text);
         switch (text) {
+			 case "我是誰": {
+                String userId = event.getSource().getUserId();
+                if (userId != null) {
+                    lineMessagingClient
+                            .getProfile(userId)
+                            .whenComplete((profile, throwable) -> {
+                                if (throwable != null) {
+                                    this.replyText(replyToken, throwable.getMessage());
+                                    return;
+                                }
+
+                                this.reply(
+                                        replyToken,
+                                        Arrays.asList(new TextMessage(
+                                                              "你是" + profile.getDisplayName()),
+                                                      new TextMessage("你的狀態訊息為"
+                                                                      + profile.getStatusMessage()))
+                                );
+
+                            });
+                } else {
+                    this.replyText(replyToken, "Bot can't use profile API without user ID");
+                }
+                break;
+            }
             case "profile": {
                 String userId = event.getSource().getUserId();
                 if (userId != null) {
@@ -254,8 +279,8 @@ public class KitchenSinkController {
                                 this.reply(
                                         replyToken,
                                         Arrays.asList(new TextMessage(
-                                                              "Display name: " + profile.getDisplayName()),
-                                                      new TextMessage("Status message: "
+                                                              "You are " + profile.getDisplayName()),
+                                                      new TextMessage("Your status message: "
                                                                       + profile.getStatusMessage()))
                                 );
 
@@ -278,9 +303,19 @@ public class KitchenSinkController {
                 }
                 break;
             }
+			case "我覺得": {
+                ConfirmTemplate confirmTemplate = new ConfirmTemplate(
+                        "我想說這件事：",
+                        new MessageAction("可以", "好啊!"),
+                        new MessageAction("不行", "沒關係!")
+                );
+                TemplateMessage templateMessage = new TemplateMessage("Confirm alt text", confirmTemplate);
+                this.reply(replyToken, templateMessage);
+                break;
+            }
             case "confirm": {
                 ConfirmTemplate confirmTemplate = new ConfirmTemplate(
-                        "Do it?",
+                        "Are you sure?",
                         new MessageAction("Yes", "Yes!"),
                         new MessageAction("No", "No!")
                 );
@@ -288,43 +323,65 @@ public class KitchenSinkController {
                 this.reply(replyToken, templateMessage);
                 break;
             }
-            case "buttons": {
+			case "了解chatbot": {
                 String imageUrl = createUri("/static/buttons/1040.jpg");
                 ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
                         imageUrl,
-                        "My button sample",
-                        "Hello, my button",
+                        "Y. Chang 機器人服務",
+                        "請選擇:",
                         Arrays.asList(
-                                new URIAction("Go to line.me",
-                                              "https://line.me"),
-                                new PostbackAction("Say hello1",
-                                                   "hello こんにちは"),
-                                new PostbackAction("言 hello2",
-                                                   "hello こんにちは",
-                                                   "hello こんにちは"),
-                                new MessageAction("Say message",
-                                                  "Rice=米")
+                                new URIAction("瀏覽NTUT網站",
+                                              "http://www.ntut.edu.tw"),
+                                new PostbackAction("和機器人私下打招呼",
+                                                   "聊天機器人，您好!"),
+                                new PostbackAction("詢問機器人問題",
+                                                   "聊天機器人是甚麼?",
+                                                   "聊天機器人（Chatterbot）是經由對話或文字進行交談的電腦程式。能夠模擬人類對話，通過圖靈測試。"),
+                                new MessageAction("聊天機器人使用案例",
+                                                  "目前，聊天機器人是虛擬助理（如Google個人助理）的一部分，可以與許多組織的應用程式，網站以及即時消息平台（Facebook Messenger）連接。")
+                        ));
+                TemplateMessage templateMessage = new TemplateMessage("Button alt text", buttonsTemplate);
+                this.reply(replyToken, templateMessage);
+                break;
+            }
+            case "buttons": {
+                String imageUrl = createUri("/static/buttons/10402.jpg");
+                ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
+                        imageUrl,
+                        "Y. Chang Bot Service",
+                        "Please choose an option from the following menu:",
+                        Arrays.asList(
+                                new URIAction("Visit the official site of NTUT",
+                                              "http://www.ntut.edu.tw"),
+                                new PostbackAction("Say Hello chat bot! privately",
+                                                   "Hello chat bot!"),
+                                new PostbackAction("Ask a question",
+                                                   "What is a chatbot?",
+                                                   "A chatbot is a computer program which conducts a conversation via auditory or textual methods."),
+                                new MessageAction("Some use cases",
+                                                  "Today, chatbots are part of virtual assistants such as Google Assistant, and are accessed via many organizations' apps, websites, and on instant messaging platforms such as Facebook Messenger.")
                         ));
                 TemplateMessage templateMessage = new TemplateMessage("Button alt text", buttonsTemplate);
                 this.reply(replyToken, templateMessage);
                 break;
             }
             case "carousel": {
-                String imageUrl = createUri("/static/buttons/1040.jpg");
+                String imageUrla = createUri("/static/buttons/10402.jpg");
+				String imageUrlb = createUri("/static/buttons/10403.jpg");
                 CarouselTemplate carouselTemplate = new CarouselTemplate(
                         Arrays.asList(
-                                new CarouselColumn(imageUrl, "hoge", "fuga", Arrays.asList(
-                                        new URIAction("Go to line.me",
-                                                      "https://line.me"),
-                                        new PostbackAction("Say hello1",
-                                                           "hello こんにちは")
+                                new CarouselColumn(imageUrla, "Introduction", "Be familiar with the Bot!", Arrays.asList(
+                                        new URIAction("Visit the official site of NTUT",
+                                                      "http://www.ntut.edu.tw"),
+                                        new PostbackAction("Say Hello chat bot! privately",
+                                                           "Hello chat bot!")
                                 )),
-                                new CarouselColumn(imageUrl, "hoge", "fuga", Arrays.asList(
-                                        new PostbackAction("言 hello2",
-                                                           "hello こんにちは",
-                                                           "hello こんにちは"),
-                                        new MessageAction("Say message",
-                                                          "Rice=米")
+                                new CarouselColumn(imageUrlb, "Q&A", "Let's try~", Arrays.asList(
+                                        new PostbackAction("Ask a question",
+                                                           "What is a chatbot?",
+                                                           "A chatbot is a computer program which conducts a conversation via auditory or textual methods."),
+                                        new MessageAction("Some use cases",
+                                                          "Today, chatbots are part of virtual assistants such as Google Assistant, and are accessed via many organizations' apps, websites, and on instant messaging platforms such as Facebook Messenger.")
                                 ))
                         ));
                 TemplateMessage templateMessage = new TemplateMessage("Carousel alt text", carouselTemplate);
@@ -338,25 +395,25 @@ public class KitchenSinkController {
                         new ImagemapBaseSize(1040, 1040),
                         Arrays.asList(
                                 new URIImagemapAction(
-                                        "https://store.line.me/family/manga/en",
+                                        "http://www.ntut.edu.tw/bin/home.php",
                                         new ImagemapArea(
                                                 0, 0, 520, 520
                                         )
                                 ),
                                 new URIImagemapAction(
-                                        "https://store.line.me/family/music/en",
+                                        "https://en.wikipedia.org/wiki/Chatbot",
                                         new ImagemapArea(
                                                 520, 0, 520, 520
                                         )
                                 ),
                                 new URIImagemapAction(
-                                        "https://store.line.me/family/play/en",
+                                        "https://www.gmail.com",
                                         new ImagemapArea(
                                                 0, 520, 520, 520
                                         )
                                 ),
                                 new MessageImagemapAction(
-                                        "URANAI!",
+                                        "Guess!",
                                         new ImagemapArea(
                                                 520, 520, 520, 520
                                         )
