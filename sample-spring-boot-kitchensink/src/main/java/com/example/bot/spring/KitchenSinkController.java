@@ -348,12 +348,12 @@ public class KitchenSinkController {
                 String imageUrl = createUri("/static/buttons/1040.jpg");
                 ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
                         imageUrl,
-                        "Y. Chang Bot Service",
-                        "Please choose an option from the following menu:",
+                        "Bot Service",
+                        "Choose an option:",
                         Arrays.asList(
-                                new URIAction("Visit the official site of NTUT",
+                                new URIAction("Visit NTUT",
                                               "http://www.ntut.edu.tw"),
-                                new PostbackAction("Say Hello chat bot! privately",
+                                new PostbackAction("Say Hello~!",
                                                    "Hello chat bot!"),
                                 new PostbackAction("Ask a question",
                                                    "What is a chatbot?",
@@ -369,10 +369,10 @@ public class KitchenSinkController {
                 String imageUrl = createUri("/static/buttons/1040.jpg");				
                 CarouselTemplate carouselTemplate = new CarouselTemplate(
                         Arrays.asList(
-                                new CarouselColumn(imageUrl, "Introduction", "Be familiar with the Bot!", Arrays.asList(
-                                        new URIAction("Visit the official site of NTUT",
+                                new CarouselColumn(imageUrl, "Introduction", "Be familiar !", Arrays.asList(
+                                        new URIAction("Visit NTUT",
                                                       "http://www.ntut.edu.tw"),
-                                        new PostbackAction("Say Hello chat bot! privately",
+                                        new PostbackAction("Say Hello~!",
                                                            "Hello chat bot!")
                                 )),
                                 new CarouselColumn(imageUrl, "Q&A", "Let's try~", Arrays.asList(
