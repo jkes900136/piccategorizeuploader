@@ -176,7 +176,7 @@ public class KitchenSinkController {
     @EventMapping
     public void handlePostbackEvent(PostbackEvent event) {
         String replyToken = event.getReplyToken();
-        this.replyText(replyToken, "Got postback/收到回傳息 " + event.getPostbackContent().getData());
+        this.replyText(replyToken, "Got postback/收到回傳訊息 " + event.getPostbackContent().getData());
     }
 
     @EventMapping
